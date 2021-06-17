@@ -5,8 +5,11 @@ import os
 import psycopg2
 import psycopg2.extras
 
-connection_string = os.environ.get('DATABASE_URL')
-connection = psycopg2.connect('postgres://wfcewjcymznnur:b39d50024622c1fdd6e5bed138e4c46181c6c6eec0690a18e4dd9d289104c614@ec2-54-78-36-245.eu-west-1.compute.amazonaws.com:5432/dfupb3jad2bns9', sslmode="require")
+connection_string = os.environ.get("DATABASE_URL")
+connection = psycopg2.connect(
+    "postgres://wfcewjcymznnur:b39d50024622c1fdd6e5bed138e4c46181c6c6eec0690a18e4dd9d289104c614@ec2-54-78-36-245.eu-west-1.compute.amazonaws.com:5432/dfupb3jad2bns9",
+    sslmode="require",
+)
 
 # os.environ['PSQL_USER_NAME'] ='keitkalon'
 # os.environ['PSQL_PASSWORD'] ='0000'
@@ -38,15 +41,15 @@ connection = psycopg2.connect('postgres://wfcewjcymznnur:b39d50024622c1fdd6e5bed
 def open_database():
     try:
         connection = psycopg2.connect(
-            'postgres://wfcewjcymznnur:b39d50024622c1fdd6e5bed138e4c46181c6c6eec0690a18e4dd9d289104c614@ec2-54-78-36-245.eu-west-1.compute.amazonaws.com:5432/dfupb3jad2bns9',
-            sslmode="require")
+            "postgres://wfcewjcymznnur:b39d50024622c1fdd6e5bed138e4c46181c6c6eec0690a18e4dd9d289104c614@ec2-54-78-36-245.eu-west-1.compute.amazonaws.com:5432/dfupb3jad2bns9",
+            sslmode="require",
+        )
 
         connection.autocommit = True
         return connection
     except psycopg2.DatabaseError as exception:
-        print('Database connection problem')
+        print("Database connection problem")
         raise exception
-
 
 
 def connection_handler(function):

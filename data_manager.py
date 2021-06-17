@@ -5,6 +5,7 @@ from psycopg2.extras import RealDictCursor
 
 import database_common
 
+
 @database_common.connection_handler
 def count_no_null(cursor):
     query = """
@@ -13,6 +14,7 @@ def count_no_null(cursor):
         WHERE edited_count is null 
         """
     cursor.execute(query)
+
 
 @database_common.connection_handler
 def get_tags(cursor):
@@ -23,6 +25,7 @@ def get_tags(cursor):
     cursor.execute(query)
     return cursor.fetchall()
 
+
 @database_common.connection_handler
 def get_questions_tag(cursor):
     query = """
@@ -31,6 +34,7 @@ def get_questions_tag(cursor):
             """
     cursor.execute(query)
     return cursor.fetchall()
+
 
 @database_common.connection_handler
 def get_all_data_tags(cursor):
@@ -43,6 +47,7 @@ def get_all_data_tags(cursor):
     cursor.execute(query)
     return cursor.fetchall()
 
+
 @database_common.connection_handler
 def get_all_tags_with_id(cursor):
     query = """
@@ -54,6 +59,7 @@ def get_all_tags_with_id(cursor):
     cursor.execute(query)
     return cursor.fetchall()
 
+
 @database_common.connection_handler
 def get_questions(cursor):
     query = """
@@ -64,6 +70,7 @@ def get_questions(cursor):
     cursor.execute(query)
     return cursor.fetchall()
 
+
 @database_common.connection_handler
 def get_users(cursor):
     query = """
@@ -72,8 +79,6 @@ def get_users(cursor):
         """
     cursor.execute(query)
     return cursor.fetchall()
-
-
 
 
 @database_common.connection_handler
@@ -86,6 +91,7 @@ def get_comment(cursor):
     cursor.execute(query)
     return cursor.fetchall()
 
+
 @database_common.connection_handler
 def get_answers(cursor):
     query = """
@@ -96,8 +102,9 @@ def get_answers(cursor):
     cursor.execute(query)
     return cursor.fetchall()
 
+
 @database_common.connection_handler
-def update_question_views(cursor,question_id,new_views):
+def update_question_views(cursor, question_id, new_views):
     query = f"""
         UPDATE question
         SET view_number = '{new_views}'
@@ -107,7 +114,7 @@ def update_question_views(cursor,question_id,new_views):
 
 
 @database_common.connection_handler
-def update_answear_accepted_to_fals(cursor,answer):
+def update_answear_accepted_to_fals(cursor, answer):
     query = f"""
             UPDATE answer
             SET accepted = FALSE
@@ -117,7 +124,7 @@ def update_answear_accepted_to_fals(cursor,answer):
 
 
 @database_common.connection_handler
-def update_answear_accepted(cursor,answer):
+def update_answear_accepted(cursor, answer):
     update_answear_accepted_to_fals(answer)
     query = f"""
         UPDATE answer
@@ -126,9 +133,10 @@ def update_answear_accepted(cursor,answer):
         """
     cursor.execute(query)
 
+
 @database_common.connection_handler
-def update_question_vote_plus(cursor,question):
-    vote = int(question['vote_number']) + 1
+def update_question_vote_plus(cursor, question):
+    vote = int(question["vote_number"]) + 1
     query = f"""
         UPDATE question
         SET vote_number = '{vote}'
@@ -136,9 +144,10 @@ def update_question_vote_plus(cursor,question):
         """
     cursor.execute(query)
 
+
 @database_common.connection_handler
-def update_question_vote_minus(cursor,question):
-    vote = int(question['vote_number']) - 1
+def update_question_vote_minus(cursor, question):
+    vote = int(question["vote_number"]) - 1
     query = f"""
         UPDATE question
         SET vote_number = '{vote}'
@@ -146,9 +155,10 @@ def update_question_vote_minus(cursor,question):
         """
     cursor.execute(query)
 
+
 @database_common.connection_handler
-def update_answer_vote_plus(cursor,answer):
-    vote = int(answer['vote_number']) + 1
+def update_answer_vote_plus(cursor, answer):
+    vote = int(answer["vote_number"]) + 1
     query = f"""
         UPDATE answer
         SET vote_number = '{vote}'
@@ -156,9 +166,10 @@ def update_answer_vote_plus(cursor,answer):
         """
     cursor.execute(query)
 
+
 @database_common.connection_handler
-def update_answer_vote_minus(cursor,answer):
-    vote = int(answer['vote_number']) - 1
+def update_answer_vote_minus(cursor, answer):
+    vote = int(answer["vote_number"]) - 1
     query = f"""
         UPDATE answer
         SET vote_number = '{vote}'
@@ -166,8 +177,9 @@ def update_answer_vote_minus(cursor,answer):
         """
     cursor.execute(query)
 
+
 @database_common.connection_handler
-def add_user(cursor,username,alias,hash_password):
+def add_user(cursor, username, alias, hash_password):
     query = f"""
         INSERT INTO users (submission_time, alias, username, password, admin, reputation)     
         VALUES (date_trunc('second', now()::timestamp), '{alias}', '{username}','{hash_password}',False,0)
@@ -176,26 +188,28 @@ def add_user(cursor,username,alias,hash_password):
 
 
 @database_common.connection_handler
-def add_answer(cursor,new_answer):
-    new_message = new_answer['message'].replace("'", "''")
+def add_answer(cursor, new_answer):
+    new_message = new_answer["message"].replace("'", "''")
     query = f"""
         INSERT INTO answer (submission_time, vote_number, question_id, message, image,users_id)     
         VALUES ('{new_answer['submission_time']}', '{new_answer['vote_number']}', '{new_answer["question_id"]}','{new_message}','{new_answer["image"]}','{new_answer["users_id"]}')
         """
     cursor.execute(query)
 
+
 @database_common.connection_handler
-def add_question(cursor,new_question):
-    new_message = new_question['message'].replace("'", "''")
-    new_title = new_question['title'].replace("'", "''")
+def add_question(cursor, new_question):
+    new_message = new_question["message"].replace("'", "''")
+    new_title = new_question["title"].replace("'", "''")
     query = f"""
         INSERT INTO question ( submission_time, view_number, vote_number, title, message, image,users_id)   
         VALUES ('{new_question['submission_time']}', '{new_question['view_number']}', '{new_question["vote_number"]}','{new_title}','{new_message}','{new_question["image"]}','{new_question["users_id"]}')
         """
     cursor.execute(query)
 
+
 @database_common.connection_handler
-def delete_question(cursor,question_id):
+def delete_question(cursor, question_id):
     query = f"""
         DELETE
         FROM question
@@ -203,8 +217,9 @@ def delete_question(cursor,question_id):
         """
     cursor.execute(query)
 
+
 @database_common.connection_handler
-def delete_answer(cursor,answer_id):
+def delete_answer(cursor, answer_id):
     query = f"""
         DELETE
         FROM answer
@@ -212,8 +227,9 @@ def delete_answer(cursor,answer_id):
         """
     cursor.execute(query)
 
+
 @database_common.connection_handler
-def delete_answers(cursor,question_id):
+def delete_answers(cursor, question_id):
     query = f"""
         DELETE
         FROM answer
@@ -221,8 +237,9 @@ def delete_answers(cursor,question_id):
         """
     cursor.execute(query)
 
+
 @database_common.connection_handler
-def delete_comment(cursor,comment_id):
+def delete_comment(cursor, comment_id):
     query = f"""
         DELETE
         FROM comment
@@ -230,8 +247,9 @@ def delete_comment(cursor,comment_id):
         """
     cursor.execute(query)
 
+
 @database_common.connection_handler
-def delete_answer_comment(cursor,answer_id):
+def delete_answer_comment(cursor, answer_id):
     query = f"""
         DELETE
         FROM comment
@@ -239,8 +257,9 @@ def delete_answer_comment(cursor,answer_id):
         """
     cursor.execute(query)
 
+
 @database_common.connection_handler
-def delete_question_comment(cursor,question_id):
+def delete_question_comment(cursor, question_id):
     query = f"""
         DELETE
         FROM comment
@@ -248,9 +267,10 @@ def delete_question_comment(cursor,question_id):
         """
     cursor.execute(query)
 
+
 @database_common.connection_handler
-def edit_comment(cursor, edit_comment,comment_id):
-    new_message = edit_comment['message'].replace("'", "''")
+def edit_comment(cursor, edit_comment, comment_id):
+    new_message = edit_comment["message"].replace("'", "''")
     query = f"""
             UPDATE comment
             SET  message = '{new_message}' ,submission_time = date_trunc('second', now()::timestamp),edited_count = edited_count + 1
@@ -258,10 +278,11 @@ def edit_comment(cursor, edit_comment,comment_id):
             """
     cursor.execute(query)
 
+
 @database_common.connection_handler
-def edit_question(cursor,question_id, edit_question, image_file):
-    new_message = edit_question['message'].replace("'", "''")
-    new_title = edit_question['title'].replace("'", "''")
+def edit_question(cursor, question_id, edit_question, image_file):
+    new_message = edit_question["message"].replace("'", "''")
+    new_title = edit_question["title"].replace("'", "''")
     query = f"""
         UPDATE question
         SET  title = '{new_title}', message = '{new_message}', image = '{image_file}'
@@ -271,8 +292,8 @@ def edit_question(cursor,question_id, edit_question, image_file):
 
 
 @database_common.connection_handler
-def edit_answer(cursor,answer_id, edit_answer, image_file):
-    new_message = edit_answer['message'].replace("'", "''")
+def edit_answer(cursor, answer_id, edit_answer, image_file):
+    new_message = edit_answer["message"].replace("'", "''")
     query = f"""
         UPDATE answer
         SET  message = '{new_message}', image = '{image_file}'
@@ -282,16 +303,17 @@ def edit_answer(cursor,answer_id, edit_answer, image_file):
 
 
 @database_common.connection_handler
-def add_comment_answer(cursor,answer_id,new_message,time,users_id):
-    n_message = new_message.replace("'","''")
+def add_comment_answer(cursor, answer_id, new_message, time, users_id):
+    n_message = new_message.replace("'", "''")
     query = f"""
         INSERT INTO comment ( answer_id, message, submission_time, edited_count,users_id)
         VALUES ('{answer_id}','{n_message}','{time}' ,'0','{users_id}')
         """
     cursor.execute(query)
 
+
 @database_common.connection_handler
-def add_comment_question(cursor,question_id,new_message,time,users_id):
+def add_comment_question(cursor, question_id, new_message, time, users_id):
     n_message = new_message.replace("'", "''")
     query = f"""
         INSERT INTO comment ( question_id, message, submission_time, edited_count,users_id)
@@ -299,8 +321,9 @@ def add_comment_question(cursor,question_id,new_message,time,users_id):
         """
     cursor.execute(query)
 
+
 @database_common.connection_handler
-def add_new_tag(cursor,tag):
+def add_new_tag(cursor, tag):
     new_tag = tag.replace("'", "''")
     query = f"""
         INSERT INTO tag (name)
@@ -308,8 +331,9 @@ def add_new_tag(cursor,tag):
         """
     cursor.execute(query)
 
+
 @database_common.connection_handler
-def add_tags_id(cursor,question_id,tag_id):
+def add_tags_id(cursor, question_id, tag_id):
     try:
         query = f"""
             INSERT INTO question_tag (question_id,tag_id)
@@ -318,10 +342,11 @@ def add_tags_id(cursor,question_id,tag_id):
             """
         cursor.execute(query)
     except:
-        print('error')
+        print("error")
+
 
 @database_common.connection_handler
-def get_tag_id(cursor,new_tag):
+def get_tag_id(cursor, new_tag):
     query = f"""
             SELECT id
             FROM tag
@@ -330,8 +355,9 @@ def get_tag_id(cursor,new_tag):
     cursor.execute(query)
     return cursor.fetchall()
 
+
 @database_common.connection_handler
-def delete_tag(cursor,tag_id):
+def delete_tag(cursor, tag_id):
     query = f"""
         DELETE
         FROM tag
@@ -339,8 +365,9 @@ def delete_tag(cursor,tag_id):
         """
     cursor.execute(query)
 
+
 @database_common.connection_handler
-def delete_question_tag(cursor,tag_id,question_id):
+def delete_question_tag(cursor, tag_id, question_id):
     query = f"""
         DELETE
         FROM question_tag
@@ -348,8 +375,9 @@ def delete_question_tag(cursor,tag_id,question_id):
         """
     cursor.execute(query)
 
+
 @database_common.connection_handler
-def delete_question_tag_id(cursor,question_id):
+def delete_question_tag_id(cursor, question_id):
     query = f"""
         DELETE
         FROM question_tag
@@ -357,8 +385,9 @@ def delete_question_tag_id(cursor,question_id):
         """
     cursor.execute(query)
 
+
 @database_common.connection_handler
-def get_search_questions(cursor,word):
+def get_search_questions(cursor, word):
     query = f"""
         SELECT question.id,question.submission_time,question.vote_number,question.view_number,question.title,question.message,question.image,question.users_id,users.alias
         FROM question 
@@ -369,8 +398,9 @@ def get_search_questions(cursor,word):
     cursor.execute(query)
     return cursor.fetchall()
 
+
 @database_common.connection_handler
-def get_search_answers(cursor,word):
+def get_search_answers(cursor, word):
     query = f"""
         SELECT *
         FROM answer 
@@ -380,8 +410,9 @@ def get_search_answers(cursor,word):
     cursor.execute(query)
     return cursor.fetchall()
 
+
 @database_common.connection_handler
-def update_reputation_question_plus(cursor,question):
+def update_reputation_question_plus(cursor, question):
     query = f"""
         UPDATE users
         SET reputation = reputation + 5
@@ -389,8 +420,9 @@ def update_reputation_question_plus(cursor,question):
         """
     cursor.execute(query)
 
+
 @database_common.connection_handler
-def update_reputation_answer_plus(cursor,answer):
+def update_reputation_answer_plus(cursor, answer):
     query = f"""
         UPDATE users
         SET reputation = reputation + 10
@@ -398,8 +430,9 @@ def update_reputation_answer_plus(cursor,answer):
         """
     cursor.execute(query)
 
+
 @database_common.connection_handler
-def update_reputation_question_minus(cursor,question):
+def update_reputation_question_minus(cursor, question):
     query = f"""
         UPDATE users
         SET reputation = reputation -2
@@ -407,8 +440,9 @@ def update_reputation_question_minus(cursor,question):
         """
     cursor.execute(query)
 
+
 @database_common.connection_handler
-def update_reputation_answer_minus(cursor,answer):
+def update_reputation_answer_minus(cursor, answer):
     query = f"""
         UPDATE users
         SET reputation = reputation -2
@@ -416,8 +450,9 @@ def update_reputation_answer_minus(cursor,answer):
         """
     cursor.execute(query)
 
+
 @database_common.connection_handler
-def update_reputation_accepted(cursor,answer):
+def update_reputation_accepted(cursor, answer):
     query = f"""
         UPDATE users
         SET reputation = reputation + 15
