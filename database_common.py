@@ -5,11 +5,13 @@ import os
 import psycopg2
 import psycopg2.extras
 
+connection_string = os.environ.get('DATABASE_URL')
+connection = psycopg2.connect('postgres://wfcewjcymznnur:b39d50024622c1fdd6e5bed138e4c46181c6c6eec0690a18e4dd9d289104c614@ec2-54-78-36-245.eu-west-1.compute.amazonaws.com:5432/dfupb3jad2bns9')
 
-os.environ['PSQL_USER_NAME'] ='keitkalon'
-os.environ['PSQL_PASSWORD'] ='0000'
-os.environ['PSQL_HOST'] ='localhost'
-os.environ['PSQL_DB_NAME'] ='yolp_db'
+# os.environ['PSQL_USER_NAME'] ='wfcewjcymznnur'
+# os.environ['PSQL_PASSWORD'] ='0000'
+# os.environ['PSQL_HOST'] ='localhost'
+# os.environ['PSQL_DB_NAME'] ='DATABASE_URL'
 
 def get_connection_string():
     # setup connection string
