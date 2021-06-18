@@ -282,14 +282,15 @@ def answer_page(question_id):
 @app.route("/add_vote")
 def add_vote_page():
     request_args = request.args
+    if 'id' in session:
 
-    session_id = session["id"]
-    print(session_id)
-    print(request_args)
-    direction = myutility.add_vote(request_args, session_id)
-    central = str(int(request_args["id"]))
-    return redirect(direction + "#" + central)
-
+        session_id = session["id"]
+        print(session_id)
+        print(request_args)
+        direction = myutility.add_vote(request_args, session_id)
+        central = str(int(request_args["id"]))
+        return redirect(direction + "#" + central)
+    return redirect('/')
 
 @app.route("/question/<question_id>/new-comment", methods=["GET", "POST"])
 def add_question_comment(question_id):
