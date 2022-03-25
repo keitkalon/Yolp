@@ -19,8 +19,17 @@ The platform is Build wtih
 - Javascript
 - CSS
 -------------
->**_STATUS:_**
->1. 
+>**_FEATURES:_**
+>
+>1. User manager
+>2. Tags
+>3. Search on Subtrings of words
+>3. Articles(Questions)
+>4. Subatricles(Answers)
+>5. Comments (Messafes)
+>6. CRUD all entities
+>7. Ascending & Descending Ordering
+
 -------------
 >**_STATUS:_**
 address: http://yolphome.herokuapp.com/
