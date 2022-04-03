@@ -1,6 +1,5 @@
 
-Python/Flask
-
+<img src="https://camo.githubusercontent.com/d700f890e4ca8d42d9fe87fd54094705fa257f2daa1b7e115d6f1beb62290d7b/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f2d507974686f6e2d3035313232413f7374796c653d666c6174266c6f676f3d707974686f6e266c6f676f436f6c6f723d626c7565" alt="Python" data-canonical-src="https://img.shields.io/badge/-Python-05122A?style=flat&amp;logo=python&amp;logoColor=blue" style="max-width: 100%;"> <img src="https://camo.githubusercontent.com/71b418f6129d084a39434f6130838c8dbe2091bd0374847828392e98158e2834/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f2d466c61736b2d3035313232413f7374796c653d666c6174266c6f676f3d666c61736b" alt="Flask" data-canonical-src="https://img.shields.io/badge/-Flask-05122A?style=flat&amp;logo=flask" style="max-width: 100%;"><br>
 ![yolp1](https://user-images.githubusercontent.com/79155265/160090942-4bdc28e1-d0fe-477c-a469-d926f3b08059.png)
 
 
