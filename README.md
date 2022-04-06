@@ -7,9 +7,21 @@
 <br>
 
 >**_ABOUT:_**
-Q&A platform is similar with 'Stack Overflow' but with a obiously different Theme, created when for Euro 2020 just started.
-The site handle user management for messages, questions and answers
-The platform is Build wtih
+>is a Q&A platform similar with 'Stack Overflow' but with a obviously different theme, created when Euro 2020 (European Nations Football Championship from 2021) just started.
+>The platform encourages football fans to ask questions and share answer about stadiums, cities locations, football matches, fans choreography and players.<br>
+>
+>- The  football fans can log in the platform with user and password,
+>- then they can ask topic question,
+>-  or answer to a topic question,
+>-  or they can leave messages<br>
+>- The questions and the Answer can have pictures incorporated.<br>
+>- The messages are only text.
+>
+>The users can follow the entire activity of a specific user<br>
+>Users can edit and delete only there own content,<br>
+>Users can like only other users content <br>
+>The content can be tagged<br>
+>Users can search for a specific content by a substring search. 
 
 -----------------
 
