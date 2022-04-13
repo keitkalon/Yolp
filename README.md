@@ -23,6 +23,9 @@
 >The content can be tagged<br>
 >Users can search for a specific content by a substring search. 
 
+# Development Team
+- <a link="https://github.com/vladghinea/"> Vlad Ghinea </a>
+
 -----------------
 
 >**_TECHNOLOGY:_**
@@ -72,4 +75,13 @@ QUESTION(_``-on white-``_)  & ANSWERS(_``-on light gray-``_)
 ANSWERS(_``-on light gray-``_) & MESSAGES(_``-on yellow or dark gray-``_)
 ![yolp7](https://user-images.githubusercontent.com/79155265/160091212-771e8e4e-fd61-4292-8a19-aae69b0c9c79.png)
 
+## Development Team
+
+* [Lamine Keita's GitHub][lamine-keita]
+* [Vlad Ghinea's GitHub][vlad-ghinea]
+
+
+
+[lamine-keita]: https://github.com/keitkalon
+[vlad-ghinea]:https://github.com/vladghinea
 
